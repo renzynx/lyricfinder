@@ -6,13 +6,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "daisyui": "^1.16.2",
+    "gnus_xyz": "^1.7.2",
     "next": "latest",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-responsive": "^9.0.0-beta.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwind": "^2.2.12",
     "tailwindcss": "^2.2.4"
   }
 }

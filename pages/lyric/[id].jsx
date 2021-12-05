@@ -1,8 +1,16 @@
 import { LyricPage } from "../../components/LyricPage";
 import { getSong } from "gnus_xyz";
+import Head from "next/head";
 
 export default function Lyric({ data }) {
-  return <LyricPage data={data} />;
+  return (
+    <>
+      <Head>
+        <title>{data.title}</title>
+      </Head>
+      <LyricPage data={data} />
+    </>
+  );
 }
 
 export async function getStaticProps(context) {

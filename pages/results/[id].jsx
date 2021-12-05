@@ -1,9 +1,11 @@
+import Head from "next/head";
 import { Navbar } from "../../components/Navbar";
 import { Tracks } from "../../components/Tracks";
 
 export default function Result({ track_list, query }) {
   return (
     <>
+      <Head>Result for {query}</Head>
       <Navbar />
       <Tracks track_list={track_list} title={`Result for ${query}`} />
     </>

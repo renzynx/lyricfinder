@@ -26,7 +26,7 @@ export default function Home({ track_list }) {
       </Head>
 
       <Navbar />
-      <Tracks track_list={track_list} title="THIS WEEK SONG CHART" />
+      <Tracks track_list={track_list} title="THIS WEEK CHART" />
     </>
   );
 }

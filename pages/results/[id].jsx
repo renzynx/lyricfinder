@@ -7,7 +7,10 @@ export default function Result({ track_list, query }) {
     <>
       <Head>Result for {query}</Head>
       <Navbar />
-      <Tracks track_list={track_list} title={`Result for ${query}`} />
+      <Tracks
+        track_list={track_list}
+        title={`Here are the results for "${query}"`}
+      />
     </>
   );
 }

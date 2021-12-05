@@ -23,12 +23,15 @@ export const Navbar = () => {
         <div className="flex items-center w-full h-16 text-white bg-gray-800">
           <Link href="/" passHref={true}>
             <div className="container px-2 cursor-pointer sm:px-6 lg:px-8">
-              <h1 className="text-bold text-lg">lyricfinder</h1>
+              <h1 className="text-bold text-md sm: md:text-lg lg:text-xl">
+                lyricfinder
+              </h1>
             </div>
           </Link>
           <div className="grid grid-flow-col">
             <button
-              className="mr-1 px-6 py-2.5 text-white text-xs font-medium leading-tight bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 rounded focus:outline-none hover:shadow-lg focus:shadow-lg active:shadow-lg shadow-md uppercase transition ease-in-out focus:ring-0"
+              className="btn btn-primary"
+              // className="mr-1 px-6 py-2.5 text-white text-xs font-medium leading-tight bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 rounded focus:outline-none hover:shadow-lg focus:shadow-lg active:shadow-lg shadow-md uppercase transition ease-in-out focus:ring-0"
               onClick={() => {
                 if (!value.length) return null;
                 window.location.href = `/results/${value}`;
@@ -64,7 +67,7 @@ export const Navbar = () => {
             </div>
           </Link>
           <button
-            className="group border-1 border-gray flex flex-col items-center justify-center float-right w-14 h-12 sm:mr-4 md:mr-0 lg:mr-8"
+            className="group border-1 border-gray right-0 flex flex-col items-center justify-center float-right w-14 h-12 sm:mr-4 md:mr-0 lg:mr-8"
             onClick={() => {
               setIsOpen(!isOpen);
               setTimeout(
@@ -112,7 +115,7 @@ export const Navbar = () => {
               Search
             </button>
             <input
-              className="placeholder-gray-400 relative mx-auto px-3 py-2 text-black text-sm bg-white border-gray-400 rounded outline-none focus:outline-none focus:ring md:mr-6 lg:mr-8"
+              className="placeholder-gray-400 h-sm relative mx-auto px-3 py-2 text-black text-sm bg-white border-gray-400 rounded outline-none focus:outline-none focus:ring md:mr-6 lg:mr-8"
               style={{ width: "60vw" }}
               type="text"
               placeholder="Type a song name here..."

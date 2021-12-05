@@ -95,10 +95,6 @@ export const Navbar = () => {
           </button>
         </div>
 
-        {
-          //! Dropdown
-        }
-
         <div
           className="container px-2 py-3 animate-bounce"
           style={{ display: isOpen ? "" : "none", animation: stop }}

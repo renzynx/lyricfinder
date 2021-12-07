@@ -9,6 +9,7 @@
     "daisyui": "^1.16.2",
     "gnus_xyz": "^1.7.2",
     "next": "latest",
+    "nprogress": "^0.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-responsive": "^9.0.0-beta.5"

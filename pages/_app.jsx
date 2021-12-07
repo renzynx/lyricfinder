@@ -1,25 +1,15 @@
 import "tailwindcss/tailwind.css";
 import "../styles/global.css";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Loading } from "../components/Loading";
 import Head from "next/head";
+import Router from "next/router";
+import NProgress from "nprogress";
+
+NProgress.configure({ showSpinner: false });
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const handleStart = (url) => {
-      url !== router.pathname ? setLoading(true) : setLoading(false);
-    };
-    const handleComplete = () => setLoading(false);
-
-    router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleComplete);
-    router.events.on("routeChangeError", handleComplete);
-  }, [router]);
-
   return (
     <>
       <Head>
@@ -39,7 +29,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="og:type" content="music" />
         <meta name="og:site_name" content="lyricfinder" />
       </Head>
-      {loading ? <Loading /> : <Component {...pageProps} />}
+      <Component {...pageProps} />
     </>
   );
 }

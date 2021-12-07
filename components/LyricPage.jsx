@@ -1,8 +1,9 @@
 import Head from "next/head";
+import Page404 from "../pages/404";
 import { Navbar } from "./Navbar";
 
 export const LyricPage = ({ data }) => {
-  if (!data) window.location.href = "/";
+  if (!data) return <Page404 />;
 
   const { title, lyrics, albumArt } = data;
 

@@ -6,7 +6,7 @@ export default function Lyric({ data }) {
   return (
     <>
       <Head>
-        <title>{data.title}</title>
+        <title>{data?.title || ""}</title>
       </Head>
       <LyricPage data={data} />
     </>

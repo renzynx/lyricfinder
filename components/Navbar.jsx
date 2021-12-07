@@ -1,124 +1,48 @@
 import { useState } from "react";
-import { useMediaQuery } from "react-responsive";
-import Link from "next/link";
 
 export const Navbar = () => {
   const [value, setValue] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [stop, setStop] = useState("");
-  const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-gray-200 transition ease transform duration-300`;
+  const [translate, setTranslate] = useState("100%");
+  const [mb, setMB] = useState("-10rem");
 
-  const isDesktopOrLaptop = useMediaQuery({
-    query: "(min-width: 1224px)",
-  });
+  const onDisplay = () => {
+    translate === "0%" ? setMB("-10rem") : setMB("0px");
+    translate === "0%" ? setTranslate("100%") : setTranslate("0%");
+  };
 
   const onChange = (e) => {
     e.preventDefault();
     setValue(e.target.value);
   };
 
-  if (isDesktopOrLaptop)
-    return (
-      <>
-        <div className="flex items-center w-full h-16 text-white bg-gray-800">
-          <Link href="/" passHref={true}>
-            <div className="container px-2 cursor-pointer sm:px-6 lg:px-8">
-              <h1 className="text-bold text-md sm: md:text-lg lg:text-xl">
-                lyricfinder
-              </h1>
-            </div>
-          </Link>
-          <div className="grid grid-flow-col">
-            <button
-              className="btn btn-primary"
-              // className="mr-1 px-6 py-2.5 text-white text-xs font-medium leading-tight bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 rounded focus:outline-none hover:shadow-lg focus:shadow-lg active:shadow-lg shadow-md uppercase transition ease-in-out focus:ring-0"
-              onClick={() => {
-                if (!value.length) return null;
-                window.location.href = `/results/${value}`;
-              }}
-              type="button"
-            >
-              Search
-            </button>
-            <input
-              className="placeholder-gray-400 relative px-3 py-2 w-96 text-black text-sm bg-white border-gray-400 rounded outline-none focus:outline-none focus:ring md:mr-6 lg:mr-8"
-              type="text"
-              placeholder="Type a song name here..."
-              onChange={onChange}
-              value={value}
-              onKeyPress={(e) => {
-                if (e.key === "Enter" || e.key === "NumpadEnter") {
-                  if (!value.length) return null;
-                  return (window.location.href = `/results/${value}`);
-                }
-              }}
-            />
-          </div>
-        </div>
-      </>
-    );
-  else
-    return (
-      <>
-        <div className="flex items-center w-full h-16 text-white bg-gray-800">
-          <Link href="/" passHref={true}>
-            <div className="container px-2 cursor-pointer sm:px-6 lg:px-8">
-              <h1 className="text-bold text-lg">lyricfinder</h1>
-            </div>
-          </Link>
-          <button
-            className="group border-1 border-gray right-0 flex flex-col items-center justify-center float-right w-14 h-12 sm:mr-4 md:mr-0 lg:mr-8"
-            onClick={() => {
-              setIsOpen(!isOpen);
-              setTimeout(
-                () => (isOpen ? setStop("") : setStop("bounce")),
-                1500
-              );
-            }}
+  return (
+    <>
+      <div className="navbar rounded-box mb-2 text-neutral-content bg-gray-800 shadow-lg">
+        <div className="navbar-start mx-2 px-2">
+          <span
+            className="text-lg font-bold cursor-pointer"
+            onClick={() => (window.location.href = "/")}
           >
-            <div
-              className={`${genericHamburgerLine} ${
-                isOpen
-                  ? "rotate-45 translate-y-3 opacity-50 group-hover:opacity-100"
-                  : "opacity-50 group-hover:opacity-100"
-              }`}
-            />
-            <div
-              className={`${genericHamburgerLine} ${
-                isOpen ? "opacity-0" : "opacity-50 group-hover:opacity-100"
-              }`}
-            />
-            <div
-              className={`${genericHamburgerLine} ${
-                isOpen
-                  ? "-rotate-45 -translate-y-3 opacity-50 group-hover:opacity-100"
-                  : "opacity-50 group-hover:opacity-100"
-              }`}
-            />
-          </button>
+            lyricfinder
+          </span>
+          <div className="flex-1 mx-2 px-2">
+            <div className="hidden items-stretch md:flex lg:flex">
+              <a
+                className="btn btn-ghost btn-sm rounded-btn"
+                onClick={() => (window.location.href = "/")}
+              >
+                Home
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div
-          className="container px-2 py-3 animate-bounce"
-          style={{ display: isOpen ? "" : "none", animation: stop }}
-        >
-          <div className="grid grid-flow-col">
-            <button
-              className="mx-auto px-6 py-2.5 text-white text-xs font-medium leading-tight bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 rounded focus:outline-none hover:shadow-lg focus:shadow-lg active:shadow-lg shadow-md uppercase transition ease-in-out focus:ring-0 sm:ml-5 md:ml-8"
-              onClick={() => {
-                if (!value.length) return null;
-                window.location.href = `/results/${value}`;
-              }}
-              style={{ width: "28vw" }}
-              type="button"
-            >
-              Search
-            </button>
+        <div className="navbar-end">
+          <div className="form-control relative hidden w-3/4 sm:hidden md:flex lg:flex">
             <input
-              className="placeholder-gray-400 h-sm relative mx-auto px-3 py-2 text-black text-sm bg-white border-gray-400 rounded outline-none focus:outline-none focus:ring md:mr-6 lg:mr-8"
-              style={{ width: "60vw" }}
               type="text"
               placeholder="Type a song name here..."
+              className="input input-bordered pr-16 w-full"
               onChange={onChange}
               value={value}
               onKeyPress={(e) => {
@@ -128,8 +52,76 @@ export const Navbar = () => {
                 }
               }}
             />
+            <button
+              className="btn btn-ghost absolute right-0 top-0 rounded-l-none"
+              onClick={() => {
+                if (!value.length) return null;
+                window.location.href = `/results/${value}`;
+              }}
+            >
+              Search
+            </button>
           </div>
+
+          <button
+            className="btn btn-square btn-ghost md:hidden lg:hidden xl:hidden"
+            onClick={onDisplay}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="inline-block w-6 h-6 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
         </div>
-      </>
-    );
+      </div>
+      <div
+        className="navbar rounded-box relative flex flex-col gap-3 bg-gray-800 duration-300 delay-500 ease-in-out md:hidden lg:hidden"
+        style={{
+          marginBottom: mb,
+          transform: `translateX(${translate})`,
+          transitionDelay: "0.3s",
+        }}
+      >
+        <button
+          className="btn btn-ghost w-full"
+          onClick={() => (window.location.href = "/")}
+        >
+          Home
+        </button>
+        <div className="form-control md: relative flex w-full sm:flex lg:hidden xl:hidden">
+          <input
+            type="text"
+            placeholder="Type a song name here..."
+            className="input input-bordered pr-16 w-full"
+            onChange={onChange}
+            value={value}
+            onKeyPress={(e) => {
+              if (e.key === "Enter" || e.key === "NumpadEnter") {
+                if (!value.length) return null;
+                return (window.location.href = `/results/${value}`);
+              }
+            }}
+          />
+          <button
+            className="btn btn-ghost absolute right-0 top-0 rounded-l-none"
+            onClick={() => {
+              if (!value.length) return null;
+              window.location.href = `/results/${value}`;
+            }}
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </>
+  );
 };

@@ -11,11 +11,9 @@ export const Tracks = ({ track_list, title }) => {
               <Link
                 href={`/lyric/${item.track.track_name}_${item.track.artist_name}`}
                 passHref={true}
+                key={index}
               >
-                <div
-                  className="md:scale-none lg:hover:scale-105 mx-auto px-3 py-5 w-full bg-gray-800 rounded-lg cursor-pointer duration-300 ease-in-out sm:transform-none"
-                  key={index}
-                >
+                <div className="md:scale-none lg:hover:scale-105 mx-auto px-3 py-5 w-full bg-gray-800 rounded-lg cursor-pointer duration-300 ease-in-out sm:transform-none">
                   <div style={{ marginLeft: "20px" }}>
                     <h1 className="md:text-md mb-4 text-gray-300 font-bold sm:text-sm lg:text-xl">
                       {item.track.artist_name}

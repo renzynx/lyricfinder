@@ -2,10 +2,12 @@ import { useState } from "react";
 
 export const Navbar = () => {
   const [value, setValue] = useState("");
+  const [display, setDisplay] = useState("none");
   const [translate, setTranslate] = useState("100%");
   const [mb, setMB] = useState("-10rem");
 
   const onDisplay = () => {
+    translate === "0%" ? setDisplay("none") : setDisplay("flex");
     translate === "0%" ? setMB("-10rem") : setMB("0px");
     translate === "0%" ? setTranslate("100%") : setTranslate("0%");
   };
@@ -86,6 +88,7 @@ export const Navbar = () => {
       <div
         className="navbar rounded-box relative flex flex-col gap-3 bg-gray-800 duration-300 delay-500 ease-in-out md:hidden lg:hidden"
         style={{
+          display,
           marginBottom: mb,
           transform: `translateX(${translate})`,
           transitionDelay: "0.3s",

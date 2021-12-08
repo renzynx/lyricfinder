@@ -6,7 +6,7 @@ You need to get Musixmatch API here: https://developer.musixmatch.com/admin/appl
 
 And Genius API key here: https://genius.com/api-clients
 
-After that just type `npm i` or `yarn install` and deploy this to whatever host you want.
+After that just deploy this to whatever host you want.
 
 ## Deploy your own
 

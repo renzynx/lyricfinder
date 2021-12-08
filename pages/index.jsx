@@ -9,6 +9,10 @@ export default function Home({ track_list }) {
         <title>lyricfinder</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
+          name="google-site-verification"
+          content="t1LgsLYBK9cGjBAM5LO7ivCLSrhw__xvJEBoBsiAK2I"
+        />
+        <meta
           name="description"
           content="A website made to find your favourite song lyric. Got a song that stuck on your mind for days and still doesn't the know the song lyric, use lyricfinder to discover lyrics now."
         />

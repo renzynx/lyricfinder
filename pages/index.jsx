@@ -6,7 +6,7 @@ export default function Home({ track_list }) {
   return (
     <>
       <Head>
-        <title>lyricfinder</title>
+        <title>Lyric Finder</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="google-site-verification"

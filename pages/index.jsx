@@ -18,15 +18,15 @@ export default function Home({ track_list }) {
         />
         <meta
           name="keywords"
-          content="lyricfinder, lyric, lyrics, lyricsfinder, lyricfinder.xyz, renzynx.space, renzynx, find lyric, save your tears, save your tear"
+          content="lyric finder, lyric find, lyric find xyz, lyricfinder, lyric, lyrics, lyricsfinder, lyricfinder.xyz, renzynx.space, renzynx, find lyric, save your tears, save your tear"
         />
         <meta name="robots" content="index,follow" />
         <meta name="author" content="renzynx, magicdorm@hotmail.com"></meta>
         <meta name="owner" content="renzynx"></meta>
         <meta name="identifier" content="https://lyricfinder.xyz"></meta>
-        <meta name="og:title" content="lyricfinder" />
+        <meta name="og:title" content="Lyric Finder" />
         <meta name="og:type" content="music" />
-        <meta name="og:site_name" content="lyricfinder" />
+        <meta name="og:site_name" content="Lyric Finder" />
       </Head>
 
       <Navbar />

@@ -25,7 +25,7 @@ export const Navbar = () => {
             className="text-lg font-bold cursor-pointer"
             onClick={() => (window.location.href = "/")}
           >
-            lyricfinder
+            lyricfinder.xyz
           </span>
           <div className="flex-1 mx-2 px-2">
             <div className="hidden items-stretch md:flex lg:flex">

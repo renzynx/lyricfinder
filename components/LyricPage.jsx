@@ -9,9 +9,6 @@ export const LyricPage = ({ data }) => {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-      </Head>
       <Navbar />
       <div className="grid grid-flow-row pb-20">
         <h1 className="my-14 text-center text-yellow-300 text-xl">{title}</h1>

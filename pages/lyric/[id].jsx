@@ -7,6 +7,14 @@ export default function Lyric({ data }) {
     <>
       <Head>
         <title>{data?.title || ""}</title>
+        <meta name='description' content={data?.title || ""} />
+        <meta name='robots' content='index,follow' />
+        <meta name="author" content="renzynx, magicdorm@hotmail.com"></meta>
+        <meta name="owner" content="renzynx"></meta>
+        <meta name="identifier" content="https://lyricfinder.xyz"></meta>
+        <meta name="og:title" content="Lyric Finder" />
+        <meta name="og:type" content="music" />
+        <meta name="og:site_name" content="Lyric Finder" />
       </Head>
       <LyricPage data={data} />
     </>

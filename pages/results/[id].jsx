@@ -5,7 +5,17 @@ import { Tracks } from "../../components/Tracks";
 export default function Result({ track_list, query }) {
   return (
     <>
-      <Head>Result for {query}</Head>
+      <Head>
+        <title>Result for {query}</title>
+        <meta name='description' content={data?.title || ""} />
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="renzynx, magicdorm@hotmail.com"></meta>
+        <meta name="owner" content="renzynx"></meta>
+        <meta name="identifier" content="https://lyricfinder.xyz"></meta>
+        <meta name="og:title" content="Lyric Finder" />
+        <meta name="og:type" content="music" />
+        <meta name="og:site_name" content="Lyric Finder" />
+      </Head>
       <Navbar />
       <Tracks
         track_list={track_list}

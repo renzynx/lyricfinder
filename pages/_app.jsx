@@ -12,7 +12,7 @@ Router.events.on("routeChangeError", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
   return (
     <>
-<Head>
+      <Head>
         <title>Lyric Finder</title>
         <link rel="icon" href="/favicon.ico" />
         <meta

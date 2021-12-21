@@ -7,7 +7,7 @@ export default function Result({ track_list, query }) {
     <>
       <Head>
         <title>Result for {query}</title>
-        <meta name='description' content={data?.title || ""} />
+        <meta name='description' content={query || ""} />
         <meta name="robots" content="index,follow" />
         <meta name="author" content="renzynx, magicdorm@hotmail.com"></meta>
         <meta name="owner" content="renzynx"></meta>

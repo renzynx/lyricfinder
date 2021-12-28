@@ -19,7 +19,7 @@ export default function Result({ track_list, query }) {
       <Navbar />
       <Tracks
         track_list={track_list}
-        title={`Here are the results for "${query}"`}
+        title={query}
       />
     </>
   );

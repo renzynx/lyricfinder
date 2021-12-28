@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Page404 from "../pages/404";
 import { Navbar } from "./Navbar";
 

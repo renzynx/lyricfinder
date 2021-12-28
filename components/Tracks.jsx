@@ -3,10 +3,10 @@ import Link from "next/link";
 export const Tracks = ({ track_list, title }) => {
   return (
     <>
-      <h1 className="mt-10 mx-auto text-center text-2xl">{title}</h1>
+      <h1 className="mt-10 mx-auto text-center text-2xl">Here are the result for "{title}"</h1>
       <div className="container mx-auto pb-20 w-4/5">
         <div className="grid gap-10 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-          {track_list.map((item, index) => {
+          {track_list.length ? track_list.map((item, index) => {
             return (
               <Link
                 href={`/lyric/${item.track.track_name}_${item.track.artist_name}`}
@@ -28,7 +28,7 @@ export const Tracks = ({ track_list, title }) => {
                 </div>
               </Link>
             );
-          })}
+          }): `I can't find any results for ${title}`}
         </div>
       </div>
     </>

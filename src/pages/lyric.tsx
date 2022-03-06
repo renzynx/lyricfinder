@@ -17,13 +17,13 @@ const Lyric: NextPage<{ lyric: string; q: string; artist: string }> = ({
       <Head>
         <title>
           {q} by {artist}
+        </title>
           <meta name="robots" content="index,follow" />
           <meta name="author" content="renzynx, magicdorm@hotmail.com"></meta>
           <meta name="owner" content="renzynx"></meta>
           <meta name="identifier" content="https://lyricfinder.xyz"></meta>
           <meta name="og:title" content={`${q} by ${artist}`} />
           <meta name="og:type" content="music" />
-        </title>
       </Head>
       <Navbar />
       <Search />

@@ -1,5 +1,3 @@
-import axios from "axios";
-import * as cheerio from "cheerio";
 import { GetServerSidePropsContext, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -8,7 +6,7 @@ import { useRouter } from "next/router";
 import Menu from "../components/Menu";
 import Navbar from "../components/Navbar";
 import { betterEncodeURI, searchResult } from "../lib/functions";
-import { ChartProps, SearchProps } from "../lib/types";
+import { SearchProps } from "../lib/types";
 
 const Search: NextPage<SearchProps> = ({ best, rest }) => {
   const router = useRouter();

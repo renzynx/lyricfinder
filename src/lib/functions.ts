@@ -1,11 +1,45 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
+import { CORS_PROXY } from "./constants";
 import { ChartProps } from "./types";
+
+export const betterGetLyric = async (q: string) => {
+  try {
+    const res = await axios.get(`${CORS_PROXY}https://www.musixmatch.com${q}`);
+    const $ = cheerio.load(res.data);
+    const firstPart = $(
+      "#site > div > div > div > main > div > div > div.mxm-track-lyrics-container > div.container > div > div > div > div.col-sm-10.col-md-8.col-ml-6.col-lg-6 > div.mxm-lyrics > span > p > span"
+    ).text();
+    const secondPart = $(
+      "#site > div > div > div > main > div > div > div.mxm-track-lyrics-container > div.container > div > div > div > div.col-sm-10.col-md-8.col-ml-6.col-lg-6 > div.mxm-lyrics > span > div > p > span"
+    ).text();
+    const title = $(
+      "#site > div > div > div > main > div > div > div.mxm-track-banner.top > div > div > div > div.col-sm-10.col-md-8.col-ml-9.col-lg-9.static-position > div.track-title-header > div.mxm-track-title > h1"
+    )
+      .text()
+      .replace("Lyrics", "");
+    const artist = $(
+      "#site > div > div > div > main > div > div > div.mxm-track-banner.top > div > div > div > div.col-sm-10.col-md-8.col-ml-9.col-lg-9.static-position > div.track-title-header > div.mxm-track-title > h2 > span > a"
+    ).text();
+    const cover = $(
+      "#site > div > div > div > main > div > div > div.mxm-track-banner.top > div > div > div > div.col-sm-1.col-md-2.col-ml-3.col-lg-3.static-position > div > div > div > img"
+    ).attr("src");
+    return {
+      lyric: firstPart + "\n" + secondPart,
+      title,
+      artist,
+      cover: `https:${cover}`,
+    };
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 
 export const getLyric = async (q: string, artist?: string) => {
   try {
     const res = await axios.get(
-      `https://cors.lyricfinder.workers.dev/?https://search.azlyrics.com/search.php?q=${q
+      `${CORS_PROXY}https://search.azlyrics.com/search.php?q=${q
         .split(" ")
         .join("+")} ${artist ? artist.split(" ").join("+") : ""}`
     );
@@ -32,14 +66,14 @@ const fallBack = async (
 ): Promise<string | null> => {
   try {
     const res = await axios.get(
-      `https://cors.lyricfinder.workers.dev/?https://www.musixmatch.com/search/${query} ${
+      `${CORS_PROXY}https://www.musixmatch.com/search/${query} ${
         artist ? artist : ""
       }`
     );
     const $ = cheerio.load(res.data);
     const search = $("a.title").first().attr("href");
     if (!search) return null;
-    const link = `https://cors.lyricfinder.workers.dev/?https://www.musixmatch.com${search}`;
+    const link = `${CORS_PROXY}https://www.musixmatch.com${search}`;
     const res2 = await axios.get(link);
     const $2 = cheerio.load(res2.data);
     const lyric = $2(".lyrics__content__ok").text();
@@ -60,15 +94,14 @@ export const betterEncodeURI = (q: string) =>
       .trim()
   );
 
-export const searchResult = async (q: string, artist?: string) => {
+export const searchResult = async (q: string) => {
   const res = await axios.get(
-    `https://www.musixmatch.com/search/${encodeURI(q as string)}`
+    `${CORS_PROXY}https://www.musixmatch.com/search/${encodeURI(q as string)}`
   );
   const $ = cheerio.load(res.data);
   const bestResult = $(
     "#search-all-results > div.main-panel > div:nth-child(1) > div.box-content > div > ul > li > div > div.media-card-body > div > h2 > a"
   );
-
   const bestResultLink = bestResult.attr("href");
   const bestResultTitle = bestResult.text();
   const bestResultArtist = $(
@@ -87,8 +120,6 @@ export const searchResult = async (q: string, artist?: string) => {
     .children();
 
   const songs: ChartProps[] = [];
-  const expression =
-    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
 
   generalResults.map((_i, el) => {
     const $el = $(el);
@@ -100,13 +131,11 @@ export const searchResult = async (q: string, artist?: string) => {
       url: $a.attr("href") as string,
       title: $a.text(),
       artist: $artist.text(),
-      thumbnail: expression.test($img.attr("srcset")?.split(" ")[2]!)
+      thumbnail: $img.attr("srcset")?.split(" ")[2].includes("https")
         ? $img.attr("srcset")?.split(" ")[2]
-        : "https://api.lorem.space/image/album?w=400&h=225",
+        : `https:${$img.attr("srcset")?.split(" ")[2]}`,
     });
   });
-
-  console.log(songs);
 
   return {
     best: {

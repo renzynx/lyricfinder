@@ -1,8 +1,7 @@
-import { FC } from "react";
-import { IChartProps } from "../lib/types";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { betterEncodeURI } from "../lib/functions";
+import { FC } from "react";
+import { IChartProps } from "../lib/types";
 
 const Menu: FC<IChartProps> = ({ songs, start }) => {
   const router = useRouter();
@@ -33,11 +32,7 @@ const Menu: FC<IChartProps> = ({ songs, start }) => {
             <div className="card-actions justify-end">
               <button
                 className="btn"
-                onClick={() => {
-                  const title = betterEncodeURI(song.title);
-                  const artist = betterEncodeURI(song.artist);
-                  router.push(`/lyric?q=${title}&artist=${artist}`);
-                }}
+                onClick={() => router.push(`/lyric?q=${song.url}`)}
               >
                 View Lyric
               </button>

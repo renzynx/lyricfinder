@@ -38,9 +38,7 @@ const Search: NextPage<SearchProps> = ({ best, rest }) => {
                 <button
                   className="btn"
                   onClick={() => {
-                    const title = betterEncodeURI(best.title);
-                    const artist = betterEncodeURI(best.artist);
-                    router.push(`/lyric?q=${title}&artist=${artist}`);
+                    router.push(`/lyric?q=${best.url}`);
                   }}
                 >
                   View Lyric
@@ -92,8 +90,7 @@ export const getServerSideProps = async (
       },
     };
 
-  const title = betterEncodeURI(q as string);
-  const { best, rest } = await searchResult(title);
+  const { best, rest } = await searchResult(q as string);
 
   return {
     props: {

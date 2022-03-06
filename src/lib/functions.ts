@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
+import { ChartProps } from "./types";
 
 export const getLyric = async (q: string, artist?: string) => {
   try {
@@ -38,9 +39,7 @@ const fallBack = async (
     const $ = cheerio.load(res.data);
     const search = $("a.title").first().attr("href");
     if (!search) return null;
-    const link =
-      "https://cors.lyricfinder.workers.dev/?https://www.musixmatch.com" +
-      search;
+    const link = `https://cors.lyricfinder.workers.dev/?https://www.musixmatch.com${search}`;
     const res2 = await axios.get(link);
     const $2 = cheerio.load(res2.data);
     const lyric = $2(".lyrics__content__ok").text();
@@ -60,3 +59,56 @@ export const betterEncodeURI = (q: string) =>
       .replace(/\[(.*?)\]|\-|\&|\((.*?)\)/g, "")
       .trim()
   );
+
+export const searchResult = async (q: string, artist?: string) => {
+  const res = await axios.get(
+    `https://www.musixmatch.com/search/${encodeURI(q as string)}`
+  );
+  const $ = cheerio.load(res.data);
+  const bestResult = $(
+    "#search-all-results > div.main-panel > div:nth-child(1) > div.box-content > div > ul > li > div > div.media-card-body > div > h2 > a"
+  );
+
+  const bestResultLink = bestResult.attr("href");
+  const bestResultTitle = bestResult.text();
+  const bestResultArtist = $(
+    "#search-all-results > div.main-panel > div:nth-child(1) > div.box-content > div > ul > li > div > div.media-card-body > div > h3 > span > span > a"
+  ).text();
+  const bestResultImg = $(
+    "#search-all-results > div.main-panel > div:nth-child(1) > div.box-content > div > ul > li > div > div.media-card-picture > img"
+  )
+    .attr("srcset")
+    ?.split(" ")[2];
+
+  const generalResults = $(
+    "#search-all-results > div.main-panel > div:nth-child(2) > div.box-content > div > ul"
+  )
+    .first()
+    .children();
+
+  const songs: ChartProps[] = [];
+
+  generalResults.map((_i, el) => {
+    const $el = $(el);
+    const $a = $el.find("a.title");
+    const $img = $el.find("img");
+    const $artist = $el.find(".artist-field");
+
+    songs.push({
+      url: $a.attr("href") as string,
+      title: $a.text(),
+      artist: $artist.text(),
+      thumbnail: $img.attr("srcset")?.split(" ")[2],
+    });
+  });
+
+  return {
+    best: {
+      url: bestResultLink ?? null,
+      title: bestResultTitle ?? null,
+      artist: bestResultArtist ?? null,
+      thumbnail: bestResultImg ?? null,
+    },
+    rest: songs ?? null,
+  };
+};

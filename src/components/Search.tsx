@@ -1,6 +1,6 @@
 import { Field, Form, Formik, FormikErrors } from "formik";
 import router from "next/router";
-import { title } from "process";
+import { betterEncodeURI } from "../lib/functions";
 import { SearchValue } from "../lib/types";
 
 const Search = () => {
@@ -13,7 +13,7 @@ const Search = () => {
           initialValues={initialValue}
           onSubmit={(values) => {
             if (!values.query) return;
-            router.push(`/search?q=${values.query}`);
+            router.push(`/results?q=${betterEncodeURI(values.query)}`);
           }}
           validate={(value: SearchValue) => {
             let errors: FormikErrors<SearchValue> = {};

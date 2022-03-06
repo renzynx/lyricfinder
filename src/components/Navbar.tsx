@@ -64,7 +64,7 @@ const Navbar = () => {
       <div className="flex-none gap-2">
         <Formik
           initialValues={initialValue}
-          onSubmit={(values) => router.push(`/search?q=${values.query}`)}
+          onSubmit={(values) => router.push(`/results?q=${values.query}`)}
           validate={(value: SearchValue) => {
             let errors: FormikErrors<SearchValue> = {};
             if (!value.query) errors.query = "Required";

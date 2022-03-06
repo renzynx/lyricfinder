@@ -1,10 +1,10 @@
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
-import { LyricProps } from "../lib/types";
 import { getLyric } from "../lib/functions";
-import Head from "next/head";
-import dynamic from "next/dynamic";
+import { LyricProps } from "../lib/types";
 
 const Lyric: NextPage<{ lyric: string }> = ({ lyric }) => {
   const Search = dynamic(() => import("../components/Search"));
@@ -49,7 +49,7 @@ export const getServerSideProps = async ({ query }: { query: LyricProps }) => {
 
   if (!lyric)
     return {
-      notFound: true,
+      lyric: "No lyric was found for this song.",
     };
 
   return {

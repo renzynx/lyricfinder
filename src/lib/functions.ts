@@ -95,8 +95,9 @@ export const betterEncodeURI = (q: string) =>
   );
 
 export const searchResult = async (q: string) => {
+  console.log(q);
   const res = await axios.get(
-    `${CORS_PROXY}https://www.musixmatch.com/search/${encodeURI(q as string)}`
+    `https://www.musixmatch.com/search/${encodeURI(q as string)}`
   );
   const $ = cheerio.load(res.data);
   const bestResult = $(

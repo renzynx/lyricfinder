@@ -90,6 +90,8 @@ export const getServerSideProps = async (
       },
     };
 
+  console.log(q);
+
   const { best, rest } = await searchResult(q as string);
 
   return {

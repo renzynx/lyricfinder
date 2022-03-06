@@ -95,7 +95,6 @@ export const betterEncodeURI = (q: string) =>
   );
 
 export const searchResult = async (q: string) => {
-  console.log(q);
   const res = await axios.get(
     `https://www.musixmatch.com/search/${encodeURI(q as string)}`
   );

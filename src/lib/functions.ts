@@ -87,6 +87,8 @@ export const searchResult = async (q: string, artist?: string) => {
     .children();
 
   const songs: ChartProps[] = [];
+  const expression =
+    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
 
   generalResults.map((_i, el) => {
     const $el = $(el);
@@ -98,9 +100,13 @@ export const searchResult = async (q: string, artist?: string) => {
       url: $a.attr("href") as string,
       title: $a.text(),
       artist: $artist.text(),
-      thumbnail: $img.attr("srcset")?.split(" ")[2],
+      thumbnail: expression.test($img.attr("srcset")?.split(" ")[2]!)
+        ? $img.attr("srcset")?.split(" ")[2]
+        : "https://api.lorem.space/image/album?w=400&h=225",
     });
   });
+
+  console.log(songs);
 
   return {
     best: {

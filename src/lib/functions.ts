@@ -38,7 +38,9 @@ const fallBack = async (
     const $ = cheerio.load(res.data);
     const search = $("a.title").first().attr("href");
     if (!search) return null;
-    const link = "https://www.musixmatch.com" + search;
+    const link =
+      "https://cors.lyricfinder.workers.dev/?https://www.musixmatch.com" +
+      search;
     const res2 = await axios.get(link);
     const $2 = cheerio.load(res2.data);
     const lyric = $2(".lyrics__content__ok").text();

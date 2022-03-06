@@ -4,9 +4,9 @@ import * as cheerio from "cheerio";
 export const getLyric = async (q: string, artist?: string) => {
   try {
     const res = await axios.get(
-      `https://search.azlyrics.com/search.php?q=${q.split(" ").join("+")} ${
-        artist ? artist.split(" ").join("+") : ""
-      }`
+      `https://cors.lyricfinder.workers.dev/?https://search.azlyrics.com/search.php?q=${q
+        .split(" ")
+        .join("+")} ${artist ? artist.split(" ").join("+") : ""}`
     );
     const $ = cheerio.load(res.data);
     const url = $(
@@ -31,7 +31,9 @@ const fallBack = async (
 ): Promise<string | null> => {
   try {
     const res = await axios.get(
-      `https://www.musixmatch.com/search/${query} ${artist ? artist : ""}`
+      `https://cors.lyricfinder.workers.dev/?https://www.musixmatch.com/search/${query} ${
+        artist ? artist : ""
+      }`
     );
     const $ = cheerio.load(res.data);
     const search = $("a.title").first().attr("href");

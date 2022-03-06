@@ -49,7 +49,9 @@ export const getServerSideProps = async ({ query }: { query: LyricProps }) => {
 
   if (!lyric)
     return {
-      lyric: "No lyric was found for this song.",
+      props: {
+        lyric: "No lyric was found for this song.",
+      },
     };
 
   return {

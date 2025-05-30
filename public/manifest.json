@@ -1,0 +1,26 @@
+{
+  "name": "Lyrics Finder",
+  "short_name": "Lyrics Finder",
+  "description": "Search and discover lyrics from your favorite songs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["music", "entertainment"],
+  "lang": "en"
+}

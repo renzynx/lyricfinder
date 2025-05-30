@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf4ed;
+  --foreground: #575279;
+  --surface: #fffaf3;
+  --overlay: #f2e9e1;
+  --muted: #9893a5;
+  --subtle: #797593;
+  --text: #575279;
+  --love: #b4637a;
+  --gold: #ea9d34;
+  --rose: #d7827e;
+  --pine: #286983;
+  --foam: #56949f;
+  --iris: #907aa9;
+  --highlight-low: #f4ede8;
+  --highlight-med: #dfdad9;
+  --highlight-high: #cecacd;
+}
+
+.dark {
+  --background: #191724;
+  --foreground: #e0def4;
+  --surface: #1f1d2e;
+  --overlay: #26233a;
+  --muted: #6e6a86;
+  --subtle: #908caa;
+  --text: #e0def4;
+  --love: #eb6f92;
+  --gold: #f6c177;
+  --rose: #ebbcba;
+  --pine: #31748f;
+  --foam: #9ccfd8;
+  --iris: #c4a7e7;
+  --highlight-low: #21202e;
+  --highlight-med: #403d52;
+  --highlight-high: #524f67;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-overlay: var(--overlay);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-text: var(--text);
+  --color-love: var(--love);
+  --color-gold: var(--gold);
+  --color-rose: var(--rose);
+  --color-pine: var(--pine);
+  --color-foam: var(--foam);
+  --color-iris: var(--iris);
+  --color-highlight-low: var(--highlight-low);
+  --color-highlight-med: var(--highlight-med);
+  --color-highlight-high: var(--highlight-high);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .bg-surface {
+    background-color: var(--surface);
+  }
+  .bg-overlay {
+    background-color: var(--overlay);
+  }
+  .bg-highlight-low {
+    background-color: var(--highlight-low);
+  }
+  .bg-highlight-med {
+    background-color: var(--highlight-med);
+  }
+  .bg-highlight-high {
+    background-color: var(--highlight-high);
+  }
+
+  .text-text {
+    color: var(--text);
+  }
+  .text-muted {
+    color: var(--muted);
+  }
+  .text-subtle {
+    color: var(--subtle);
+  }
+  .text-love {
+    color: var(--love);
+  }
+  .text-gold {
+    color: var(--gold);
+  }
+  .text-rose {
+    color: var(--rose);
+  }
+  .text-pine {
+    color: var(--pine);
+  }
+  .text-foam {
+    color: var(--foam);
+  }
+  .text-iris {
+    color: var(--iris);
+  }
+
+  .border-surface {
+    border-color: var(--surface);
+  }
+  .border-overlay {
+    border-color: var(--overlay);
+  }
+  .border-highlight-low {
+    border-color: var(--highlight-low);
+  }
+  .border-highlight-med {
+    border-color: var(--highlight-med);
+  }
+  .border-highlight-high {
+    border-color: var(--highlight-high);
+  }
+
+  .ring-pine {
+    --tw-ring-color: var(--pine);
+  }
+  .border-pine {
+    border-color: var(--pine);
+  }
+
+  .placeholder-muted::placeholder {
+    color: var(--muted);
+  }
+}
